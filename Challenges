@@ -1,0 +1,104 @@
+//* 🧪 Challenge — Welcome Message Builder
+
+//? 🎯 Goal:
+//  Build two versions of a function that greet users. One with a function declaration, one with a function expression.
+
+//* 🧩 Task:
+//  1. Write a function that returns "Welcome, [username]!" using a declaration.
+//  2. Write the same logic using a function expression.
+//  3. Add a check: if no username is provided, return "Welcome, guest!".
+
+//! Solution
+
+// Function Declaration
+function greetUser(username) {
+    if (!username) return 'Welcome, guest!';
+    return `Welcome, ${username}!`;
+}
+
+console.log(greetUser('John'));
+
+// Function Expression
+
+const greetUserExp = function(username) {
+    if (!username) return 'Welcome, guest!';
+    return `Welcome, ${username}!`
+}
+
+console.log(greetUserExp());
+
+
+//* 🧪 Challenge — Calculate Total with Discount
+
+//? 🎯 Goal:
+//  Use a function to calculate the total cost after applying a discount.
+
+//* 🧩 Task:
+//  1. Create a declared function calculateTotal(price, discountRate) that subtracts the discount from the price.
+//  2. Create a function expression, applyTax, that takes the result and applies a 10% tax.
+
+//! Solution
+
+function calculateTotal(price, discountRate) {
+    return price - price * discountRate;
+}
+
+const applyTax = function (amount) {
+    return amount * 1.10;
+}
+
+const discounted = calculateTotal(100, 0.2);
+const finalPrice = applyTax(discounted);
+
+console.log(`Final price with tax: $${finalPrice.toFixed(2)}`);
+
+//* 🧪 Challenge — Task Scheduler (with Closures)
+
+//? 🎯 Goal:
+//  Use a function expression with a closure to create a task manager that tracks and logs tasks added to a list.
+
+//* 🧩 Task:
+//  1. Create a function expression called createTaskManager.
+//  2. It should return another function that adds a task to an internal array.
+//  3. Each time the inner function is called, it should log the current list of tasks.
+
+//! Solution
+
+const createTaskManager = function () {
+    const tasks = [];
+    return function (task) {
+        tasks.push(task);
+        console.log('Current Tasks:', tasks.join(', '));
+    };
+};
+
+const addTask = createTaskManager();
+addTask('Task');
+addTask('Write code');
+addTask('Review pull request');
+
+//* 🧪 Challenge — “Task Scheduler (with Closures)”
+
+//? 🎯 Goal:
+//  Use a function expression with a closure to create a task manager that tracks and logs tasks added to a list.
+
+//* 🧩 Task:
+//  1. Create a function expression called createTaskManager.
+//  2. It should return another function that adds a task to an internal array.
+//  3. Each time the inner function is called, it should log the current list of tasks.
+
+//! Solution
+
+const createTasksManager = function() {
+    const tasks = [];
+
+    return function(task) {
+        tasks.push(task);
+        console.log("Current Tasks:", tasks.join(", "));
+    };
+};
+
+const addTasks = createTasksManager();
+addTask("Read");
+addTask("Write code");
+addTask("Review pull request");
