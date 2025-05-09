@@ -1,0 +1,113 @@
+//TODO  🧪 JavaScript Functions Exercises
+
+//* ✅ 1. Greeting Function (Declaration)
+//  Create a function called greetUser that accepts a name parameter and returns:
+//  • "Welcome, [name]!" if a name is provided
+//  • "Welcome, Guest!" if no name is given
+
+function greetUser(name = 'Guest') {
+    return `Welcome,  ${name}!`;
+};
+
+console.log(greetUser());
+
+//* ✅ 2. Rectangle Area (Expression)
+//  Create a function expression assigned to a variable named calculateArea that takes two parameters: width and height. Return the area (width × height).
+
+const calculateArea = function (width, height) {
+    return width * height;
+}
+
+console.log(calculateArea(22, 2));
+
+//* ✅ 3. Multiplication Fix
+//  The function below logs the result instead of returning it. Fix it so that it returns the value.
+
+function multiply(x, y) {
+    return x * y;
+}
+
+multiply(1, 2);
+multiply(3, 4);
+multiply(5, 6);
+multiply(7, 8);
+multiply(8, 9);
+
+//* ✅ 4. Default Parameters
+//  Write a function greet that greets a user. If no name is provided, it should use a default parameter "Visitor".
+
+function greet(name = "Visitor") {
+    return `Welcome, ${name}!`;
+};
+
+console.log(greet());
+
+//* ✅ 5. Add Two Numbers
+//  Write a function add that takes two numbers and returns their sum.
+
+function add(a, b) {
+    return a + b;
+}
+
+console.log(add(1, 2));
+console.log(add(3, 4));
+console.log(add(5, 6));
+console.log(add(7, 8));
+console.log(add(8, 9));
+
+//* ✅ 6. Concatenate Strings
+//  Create a function makeFullName that takes a firstName and lastName, and returns the full name.
+
+function makeFullName(firstName, lastName) {
+    let fullName = firstName.concat(" ", lastName)
+    return fullName;
+}
+
+console.log(makeFullName('John', 'Doe'));
+
+//* ✅ 7. Check Age Eligibility
+//  Write a function isAdult that takes an age and returns true if the age is 18 or older, otherwise returns false.
+
+function isAdult(age) {
+    if (age >= 18) {
+        return true;
+    } else {
+        return false;
+    };
+};
+
+console.log(isAdult(18));
+console.log(isAdult(17));
+console.log(isAdult(20));
+
+//* ✅ 8. Temperature Converter (F to C)
+//  Write a function toCelsius that converts Fahrenheit to Celsius using this formula: (f - 32) × 5/9.
+
+function toCelsius(fahrenheit) {
+    return ((fahrenheit - 32) * 5) / 9;
+}
+
+console.log(toCelsius(10, 'toCelsius'));
+
+//* ✅ 9. Describe Day
+//  Create a function describeDay that takes a day of the week and returns a message like: "Today is Monday. Time to work!"
+
+function describeDay(day) {
+    const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    if (weekdays.includes(day)) {
+        return `Today is ${day}. Time to work!`;
+    };
+}
+
+console.log(describeDay('Monday'));
+console.log(describeDay('Sunday'));
+
+//* ✅ 10. Function Without Parameters
+//  Write a function called getTime that returns the current hour using new Date().getHours()
+
+function getTime() {
+    return new Date().getHours();
+}
+
+console.log(getTime());
