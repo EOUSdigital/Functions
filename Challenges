@@ -27,6 +27,7 @@ const greetUserExp = function(username) {
 
 console.log(greetUserExp());
 
+------------------------------------------------------------------------
 
 //* 🧪 Challenge — Calculate Total with Discount
 
@@ -76,6 +77,8 @@ const addTask = createTaskManager();
 addTask('Task');
 addTask('Write code');
 addTask('Review pull request');
+
+----------------------------------------------------------------------------
 
 //* 🧪 Challenge — “Task Scheduler (with Closures)”
 
