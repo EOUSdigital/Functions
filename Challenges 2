@@ -111,3 +111,581 @@ function getTime() {
 }
 
 console.log(getTime());
+
+-----------------------------------------------------------------------------------------------
+
+//TODO  ⚙️ JavaScript Functions Exercises - Intermediate level Set 1
+
+//* ✅ 1. Tip Calculator with Default Rate
+//  Create a function calculateTip(bill, tipRate) that returns the tip amount. If tipRate is not provided, default it to 0.15.
+
+//! Solution
+
+function calculateTip(bill, tipRate = 0.15) {
+    return +(bill * tipRate).toFixed(2);
+};
+
+console.log(calculateTip(100, 0.2));
+console.log(calculateTip(100));
+
+//* ✅ 2. Even or Odd (Arrow Function)
+//  Rewrite the following function as an arrow function.
+
+// function isEven(n) {
+//     return n % 2 === 0;
+// }
+
+//! Solution
+
+const isEven = (n) => n % 2 == 0; 
+
+console.log(isEven(4));
+console.log(isEven(3));
+
+//* ✅ 3. Function with Conditional Logic
+//  Write a function canDrive(age) that returns:
+//  • "Yes" if age is 18 or older,
+//  • "Permit only" if age is between 16 and 17,
+//  • "No" otherwise.
+
+//! Solution
+
+function canDrive(age2) {
+    if (age2 >= 18) {
+        return "Yes";
+    } else if (age2 >= 16) {
+        return "Permit only";
+    } else {
+        return "No";
+    }
+}
+
+console.log(canDrive(15));
+console.log(canDrive(16));
+console.log(canDrive(17));
+console.log(canDrive(18));
+console.log(canDrive(19));
+
+//* ✅ 4. Scope Check
+//  What is the result of this code?
+//  Explain why the result happens.
+
+function testScope() {
+    let secret = 'scoped!';
+}
+
+//? console.log(secret);
+
+//! Solution
+
+//  We will receive a 'ReferenceError: secret is not defined' because variables are LOCAL to the function and declared inside a { } block cannot be accessed from outside the block.
+
+//* ✅ 5. Average of Numbers
+//  Create a function average(a, b, c) that returns the average of three numbers.
+
+//! Solution
+
+function average(a = 0, b = 0, c = 0) {
+    return (a + b + c) / 3;
+}
+
+console.log(average());
+
+// 🧠 Alternative dynamic number of inputs, with a different type of function.
+
+function average2(...numbers) {
+    return numbers.reduce((sum, n) => sum + n, 0) / numbers.length;
+}
+
+//* ✅ 6. Function Expression Refactor
+//  Convert this function declaration to a function expression assigned to a variable.
+
+function shout(message) {
+    return message.toUpperCase() + "!";
+}
+
+//! Solution
+
+const shout2 = function (message) {
+    return message.toUpperCase() + "!";
+}
+
+console.log(shout2("hello"));
+
+// 🧠 Alternative solution using arrow function.
+
+const shout3 = message => message.toUpperCase() + '!';
+
+//* ✅ 7. Validate Password Length
+//  Write a function isPasswordValid(password) that returns true if the password is at least 8 characters long, otherwise false.
+
+//! Solution
+
+function isPasswordValid(password) {
+    return password.length >= 8 ? true : false;
+}
+
+console.log(isPasswordValid("1234567"));
+console.log(isPasswordValid("12345678"));
+
+//* ✅ 8. Create a Range (Array Builder)
+//  Write a function createRange(start, end) that returns an array of numbers from start to end (inclusive).
+
+//! Solution
+
+function createRange(start, end) {
+    const arr = [];
+    for (let i = start; i <= end; i++) {
+        arr.push(i);
+    };
+    return arr;
+}
+
+console.log(createRange(3, 6));
+
+// 🧠 Alternative solution that allows for reverse ranges (e.g., createRange(6, 3) → [6, 5, 4, 3]).
+
+function createRange(start, end) {
+    const arr = [];
+    if (start <= end) {
+        for (let i = start; i <= end; i++) {
+            arr.push(i);
+        }
+    } else {
+        for (let i = start; i >= end; i--) {
+            arr.push(i);
+        }
+    }
+    return arr;
+}
+
+console.log(createRange(7, 2));
+
+//* ✅ 9. Add Days to Date
+//  Create a function addDays(date, days) that adds a number of days to a given Date object and returns the new date.
+
+//! Solution
+
+function addDays(date, days) {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result.toDateString();
+}
+
+console.log(addDays('2000-10-10', 10));
+
+//* ✅ 10. First Character Uppercase
+//  Write a function capitalize(str) that returns the string with the first character capitalized.
+
+//! Solution
+
+function capitalize(str) {
+
+    return String(str).charAt(0).toUpperCase() + String(str).slice(1);
+}
+
+console.log(capitalize('peace!'));
+
+// 🧠 Alternative solution to guard against empty strings.
+
+function capitalize(str) {
+    str = String(str);
+    if (str.length === 0) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+console.log(capitalize('hello!'));
+
+
+//TODO  ⚙️ JavaScript Functions Exercises - Intermediate level Set 2
+
+//* ✅ 1. Reverse a String
+//  Write a function reverseString(str) that returns the reversed version of the input string.
+
+//! Solution
+
+function reverseString(str) {
+    return str.split('').reverse().join('');
+}
+
+console.log(reverseString('hello'));
+
+// 🧠 Alternative solution for a safety check to ensure non-string input does not break it.
+
+function reverseString(str) {
+    return String(str).split('').reverse().join('');
+}
+
+//* ✅ 2. Count Vowels
+//  Write a function countVowels(str) that returns the number of vowels in the given string (a, e, i, o, u — case-insensitive).
+
+//! Solution
+
+function countVowels(str) {
+    const count = str.match(/[aeiou]/gi)?.length || 0;
+    return count;
+}
+
+console.log(countVowels('hello'));
+
+//* ✅ 3. Is Palindrome
+//  Write a function isPalindrome(word) that checks if the word reads the same forward and backward (ignore case and spacing).
+
+//! Solution
+
+function isPalindrome(word) {
+    const str = String(word).toLowerCase().replace(/\s+/g, ''); // normalize
+    const reversed = str.split('').reverse().join('');
+    return str === reversed;
+}
+
+console.log(isPalindrome('saippuakivikauppias'));   // true
+console.log(isPalindrome("Racecar"));               // true
+console.log(isPalindrome("hello"));
+console.log(isPalindrome(121));
+console.log(isPalindrome('tattarrattat'));          // true
+
+//* ✅ 4. Truncate String
+//  Write a function truncate(str, maxLength) that returns the string truncated to maxLength, followed by "..." if it was cut.
+
+//! Solution
+
+function truncate(str, maxLength) {
+    if (str.length > maxLength) {
+        return str.slice(0, maxLength) + '...';
+    } else {
+        return str;
+    };
+}
+
+// 🧠 Alternative solution to return a more concise (same logic, less code).
+
+function truncate(str, maxLength) {
+    return str.length > maxLength ? str.slice(0, maxLength) + '...' : str;
+}
+
+console.log(truncate("JavaScript is awesome", 10));
+
+//* ✅ 5. FizzBuzz Function
+//  Create a function fizzBuzz(n) that:
+//  • Prints "Fizz" if n is divisible by 3
+//  • "Buzz" if divisible by 5
+//  • "FizzBuzz" if divisible by both
+//  • Or just returns n otherwise.
+
+//! Solution
+
+function fizzBuzz(n) {
+    if (n % 15 === 0) {
+        return "FizzBuzz";
+    } else if (n % 3 === 0) {
+        return "Fizz";
+    } else if (n % 5 === 0) {
+        return "Buzz";
+    } else {
+        return 'The number is not a multiple of 3 or 5.';
+    };
+}
+
+console.log(fizzBuzz(9));
+console.log(fizzBuzz(10));
+console.log(fizzBuzz(15));
+console.log(fizzBuzz(1));
+
+// 
+
+//* ✅ 6. Find Longest Word
+//  Write a function findLongestWord(sentence) that returns the longest word from the sentence.
+
+///! Solution
+
+function findLongestWord(sentence) {
+    const words = sentence.split(" ");
+    let longest = "";
+
+    for (let word of words) {
+        if (word.length > longest.length) {
+            longest = word;
+        }
+    }
+    return longest;
+}
+
+console.log(findLongestWord("The quick brown fox jumps"));
+
+//  🧠 Alternative solution
+
+const findLongestWord2 = sentence => sentence
+    .split(" ")
+    .reduce((longest, word) => word
+        .length > longest
+            .length ? word : longest
+    );
+
+
+//* ✅ 7. Repeat String
+//  Create a function repeatString(str, times) that repeats the string str the given number of times.
+
+//! Solution
+
+function repeatString(str, times) {
+    return str.repeat(times);
+}
+
+console.log(repeatString("abc", 3));
+
+//  🧠 Alternative solution adds a safeguard to handle invalid repeat counts, such as negative numbers.
+
+function repeatString(str, times) {
+    return times >= 0 ? str.repeat(times) : '';
+}
+
+//* ✅ 8. Factorial
+//  Write a function factorial(n) that returns the factorial of a number using iteration (not recursion for now).
+
+//! Solution
+
+function factorial(n) {
+    if (n < 0) return undefined;
+    let result = 1;
+    for (let i = 2; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+console.log(factorial(6));
+console.log(factorial(0));
+console.log(factorial(1));
+
+//* ✅ 9. Title Case Sentence
+//  Write a function titleCase(sentence) that returns the sentence with the first letter of each word capitalized.
+
+//! Solution
+
+function titleCase(sentence) {
+    return sentence
+        .split(" ")
+        .map(word => word
+            .charAt(0)
+            .toUpperCase() + word
+                .slice(1))
+        .join(" ");
+}
+
+console.log(titleCase("this is a title"));
+
+//  🧠 Alternative solution for clarity and control. If regex is not required, a loop-based approach is beginner-friendly.
+
+//* ✅ 10. Remove Duplicates from Array
+//  Write a function removeDuplicates(arr) that returns a new array without duplicate values.
+
+function removeDuplicates(arr) {
+    return [...new Set(arr)];
+}
+
+console.log(removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
+
+console.log('===============================================');
+//TODO  🚀 JavaScript Functions Exercises — Advanced Level Set 1
+
+//* ✅ 1. Closure Counter
+//  Write a function createCounter() that returns another function. Every time the returned function is called, it should increment and return a private counter.
+
+//! Solution
+
+function createCounter() {
+    let count = 0; // This is a private variable
+    
+    return function () {
+        count += 1;
+        return count;
+    };
+}
+
+const counter = createCounter();
+counter(); // 1
+counter(); // 2
+
+//* ✅ 2. Deep Clone Object
+//  Write a function deepClone(obj) that returns a deep copy of a nested object. It should handle objects within objects (no circular refs yet).
+
+//! Solution
+
+function deepClone(obj) {
+    if (obj === null || typeof obj !== 'object') {
+        return obj;
+    }
+    
+    if (Array.isArray(obj)) {
+        return obj.map(item => deepClone(item));
+    }
+    
+    const clonedObj = {};
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            clonedObj[key] = deepClone(obj[key]);
+        }
+    }
+    return clonedObj;
+}
+
+const original = { a: 1, b: { c: 2, d: [3, 4] } };
+const copy = deepClone(original);
+
+console.log(copy);
+console.log(copy !== original);
+console.log(copy.b !== original.b);
+console.log(copy.b.d !== original.b.d);
+
+//* ✅ 3. Currying Function
+//  Write a function add(a)(b) that works like this: add(2)(3);
+
+//! Solution
+
+function add(a) {
+    return function(b) {
+        return a + b;
+    };
+}
+
+console.log(add(2)(3));
+
+
+//* ✅ 4. Memoized Fibonacci
+//  Write a function fib(n) that returns the nth Fibonacci number using memoization for efficiency.
+
+//! Solution
+
+function fib(n, memo = {}) {
+    if (n <= 1) return n;
+    if (memo[n]) return memo[n];
+    memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+    return memo[n];
+}
+
+console.log(fib(6));
+console.log(fib(10));
+console.log(fib(50));
+
+//* ✅ 5. Debounce Function
+//  Write a function debounce(fn, delay) that ensures fn only runs after a pause of delay ms — useful for scroll or resize events.
+
+//! Solution
+
+function debounce(fn, delay) {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
+function logResult(value) {
+    console.log('Result:', value);
+}
+
+const debouncedLog = debounce(logResult, 500);
+
+//! debouncedLog(42); // "Result: 42" will be logged after 500ms if not called again within that time
+
+//* ✅ 6. Group By Property
+//  Write a function groupBy(arr, key) that groups objects by a specific property.
+//  groupBy([{type:'fruit'}, {type:'veg'}, {type:'fruit'}], 'type')
+
+//! Solution
+
+function groupBy(arr, key) {
+    return arr.reduce((result, item) => {
+        const group = item[key];
+        if (!result[group]) {
+            result[group] = [];
+        }
+        result[group].push(item);
+        return result;
+    }, {});
+}
+
+const data = [
+    { type: 'fruit', name: 'apple' },
+    { type: 'veg', name: 'carrot' },
+    { type: 'fruit', name: 'banana' }
+];
+
+console.log(groupBy(data, 'type'));
+
+//* ✅ 7. Function Composition
+//  Write a function compose(f, g) that returns a new function: compose(f, g)(x) = f(g(x))
+
+//! Solution
+
+function compose(f, g) {
+    return function(x) {
+        return f(g(x));
+    };
+}
+
+const double = x => x * 2;
+const increment = x => x + 1;
+
+const doubleAfterIncrement = compose(double, increment);
+
+console.log(doubleAfterIncrement(3));           // Explanation: increment(3) = 4, double(4) = 8
+
+//* ✅ 8. Flatten Nested Arrays
+//  Write a recursive function flatten(arr) that returns a flat version of a deeply nested array.
+
+//! Solution
+
+function flatten(arr) {
+    return arr.reduce((flat, item) => 
+    Array.isArray(item) 
+        ? flat.concat(flatten(item)) 
+        : flat.concat(item), 
+    []
+    );
+}
+
+console.log(flatten([1, [2, [3, 4], 5], 6]));   // Output: [1, 2, 3, 4, 5, 6]
+
+
+//* ✅ 9. Once Function
+//  Write a function once(fn) that returns a new version of fn that can only be called once.
+console.log('----gf');
+//! Solution
+
+function once(fn) {
+    let called = false;
+    let result;
+    return function (...args) {
+        if (!called) {
+            result = fn.apply(this, args);
+            called = true;
+        }
+        return result;
+    };
+}
+
+const sayHello = once(() => console.log('Hello!'));
+
+// console.log(sayHello());
+
+//* ✅ 10. Implement a Pipe Utility
+//  Write a pipe(...fns) function that combines multiple functions and executes them in order (left-to-right).
+
+//! Solution
+
+function pipe(...fns) {
+    return function(x) {
+        return fns.reduce((v, f) => f(v), x);
+    };
+}
+
+const add2 = x => x + 1;
+const double2 = x => x * 2;
+const subtract = x => x - 3;
+
+const process = pipe(add2, double2, subtract);
+
+console.log(process(5));                // Explanation: ((5 + 1) * 2) - 3 = 9
+
