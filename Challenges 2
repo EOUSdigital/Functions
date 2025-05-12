@@ -687,5 +687,6 @@ const subtract = x => x - 3;
 
 const process = pipe(add2, double2, subtract);
 
-console.log(process(5));                // Explanation: ((5 + 1) * 2) - 3 = 9
+console.log(process(5));
 
+----------------------------------------------------------------------------
