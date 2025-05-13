@@ -689,4 +689,451 @@ const process = pipe(add2, double2, subtract);
 
 console.log(process(5));
 
-----------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+//TODO 🔰 Challenge Track: Deepen & Broaden JavaScript Skills
+
+//* 🔢 1. Flatten One Level of Array
+//  Write a function flattenOneLevel(arr) that flattens just one level of a nested array.
+
+//! Solution
+
+function flattenOneLevel(arr) {
+    return arr.flat();
+}
+
+console.log(flattenOneLevel([1, [2, 3], 4]));
+
+//* 💬 2. Word Frequency Counter
+//  Write a function wordFrequency(str) that counts how often each word appears.
+
+//! Solution
+
+function wordFrequency(str) {
+    const wordCounts = new Map();
+    const words = str
+        .replace(/[^\w\s]/g, '')
+        .toLowerCase()
+        .split(/\s+/);
+
+    words.forEach(word => {
+        const count = wordCounts.get(word) || 0;
+        wordCounts.set(word, count + 1);
+    });
+    
+    for (const [word, count] of wordCounts.entries()) {
+        console.log(`'${word}': ${count}`);
+    };
+    return wordCounts;
+}
+
+console.log(wordFrequency('Hello Hello hello World, Map!'));
+
+//* 🧠 3. One-Time Function Call
+//  Write a function once(fn) that allows fn to run once, and ignores further calls.
+
+//! Solution
+
+function once(fn) {
+    let called = false;
+    let result;
+    return function (...args) {
+        if (!called) {
+            result = fn.apply(this, args);
+            called = true;
+        }
+        return result;
+    };
+}
+
+const greetOnce = once(() => console.log('We did it once!'));
+
+greetOnce();
+greetOnce();
+
+//* 📅 4. Format Date to YYYY-MM-DD
+//  Create a function formatDate(date) that returns a string like 2025-05-07.
+
+//! Solution
+
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
+const date = new Date();
+console.log(formatDate(new Date("2000-01-02"))); // "2000-01-02"
+
+//* 🎯 5. Mini Closure Counter
+//  Create a function makeCounter() that returns a function that adds 1 each time it’s called.
+
+//! Solution
+
+function makeCounter() {
+    let count = 0;
+    return function () {
+        count++;
+        return count;
+    };
+}
+
+const counter2 = makeCounter()
+console.log(counter2());
+console.log(counter2());
+
+//* 🛒 6. Shopping Cart Total
+//  Given an array of item objects, return the total cost.
+
+//! Solution
+
+const inventory = [
+    { name: "Pen", price: 1.5 },
+    { name: "Notebook", price: 3.75 },
+];
+
+function calculateTotal(items) {
+    return items.reduce((sum, item) => sum + item.price, 0);
+}
+
+console.log(calculateTotal(inventory));
+
+//* 🔀 7. Compose Two Functions
+//  Write compose(f, g)(x) so that it returns f(g(x)).
+
+//! Solution
+
+const compose2 = (f, g) => (x) => f(g(x));
+
+const f = (x) => x + 1;
+const g = (x) => x * 2;
+
+const h = compose2(f, g);
+
+console.log(h(5));
+
+//* 🔍 8. Find Most Common Letter
+//  Write mostCommonChar(str) that returns the character that appears the most.
+
+//! Solution
+
+function mostCommonChar(str) {
+    let countMap = {};
+
+    for (let character of str) {
+        if (countMap[character]) {
+            countMap[character]++;
+        } else {
+            countMap[character] = 1;
+        };
+    }
+
+    let maxChar = '';
+    let maxCount = 0;
+
+    for (let [char, count] of Object.entries(countMap)) {
+        if (count > maxCount) {
+            maxChar = char;
+            maxCount = count
+        };
+    }
+    let result = {};
+    result[maxChar] = maxCount;
+    return result;
+}
+
+function main() {
+    let str = "Module4-Lesson02.02CreatingFunction-Challenges";
+
+    let result = mostCommonChar(str);
+    let maxEntry = Object.entries(result)[0];
+    console.log(`Character: ${maxEntry[0]}, Count: ${maxEntry[1]}`);
+}
+
+main();
+
+//* 🧩 9. Group By Property (Basic Version)
+//  Group an array of objects by a given key using a loop.
+
+const estate = [
+    {property: 'Single-family detached', type: 'Cottage', material: 'wood' },
+    {property: 'Condominium', type: 'Flat', material: 'concrete' },
+    {property: 'Single-family detached', type: 'Bungalow', material: 'plywood' },
+    {property: 'Central-passage', type: 'Farmhouse', material: 'wood' },
+    {property: 'Single-family detached', type: 'Detached Cottage', material: 'brick' },
+    {property: 'Single-family detached', type: 'Chalet', material: 'wood' },
+    {property: 'Split-level', type: 'Mansions', material: 'brick' },
+]
+
+function groupBy(arr, key) {
+    return arr.reduce((acc, item) => {
+        const groupKey = item[key];
+        acc[groupKey] = acc[groupKey] || [];
+        acc[groupKey].push(item);
+        return acc;
+    }, {});
+}
+
+console.log(groupBy(estate, 'material'));
+
+//* 🧹 10. Clean Object
+//  Write removeEmpty(obj) that returns a copy of the object with null, undefined, or "" values removed.
+
+//! Solution
+
+const data2 = {
+    name: "Alice",
+    age: null,
+    email: "",
+    city: "Paris",
+    premium: false,
+    zip: 0
+};
+
+const removeEmpty = (obj) =>
+    (!!obj && typeof obj === "object" && !Array.isArray(obj))
+        ? Object.fromEntries(
+            Object.entries(obj).filter(([_, value]) => value !== null && value !== undefined && value !== "")) : obj;
+
+console.log(removeEmpty(data2));
+
+//* 🧪 11. Curry Two Arguments
+//  Create a function add(a)(b) that returns the sum of a and b.
+
+//! Solution
+
+const add3 = a => b => a + b;
+
+console.log(add3(25)(15)); // 40
+
+//* 📊 12. Average Rating
+//  Write averageRating(data) that calculates the average from a list of {user, rating} objects.
+
+//! Solution
+
+const userList = [
+    { user: 'John', rating: 5.0 },
+    { user: 'Alice', rating: 4.0 },
+    { user: 'Mary', rating: 4.5 },
+    { user: 'William', rating: 3.0 },
+    { user: 'Charles', rating: 3.5 },
+];
+
+function averageRating(data) {
+    if (data.length === 0) return 0;
+    const sum = data.reduce((total, item) => total + item.rating, 0);
+    return +(sum / data.length).toFixed(2);
+}
+
+console.log(averageRating(userList));
+
+//* 🔁 13. Memoize Simple Function
+//  Create a memoize(fn) wrapper that caches previous results for a single-arg function.
+
+//! Solution
+
+const argFunction = (key) => (key + 1);
+
+const memoize = (fn) => {
+    let cache = {};
+    return (...args) => {
+        let key = JSON.stringify(args);
+        if (key in cache) {
+            console.log('Fetching from cache');
+            return cache[key];
+        } else {
+            console.log('Calculating result');
+            let result = fn(...args);
+            cache[key] = result;
+            return result;
+        };
+    };
+}
+
+const memoizedAdd = memoize((a, b) => a + b);
+console.log(memoizedAdd(2, 3));
+console.log(memoizedAdd(2, 3));
+console.log(memoizedAdd(1, 4));
+console.log(memoizedAdd(1, 4));
+
+//* 📋 14. Task Organizer by Status
+//  Group an array of task objects by "done" and "todo" based on a completed boolean.
+
+//! Solution
+
+const tasks = [
+    { id: 1, description: "Write proposal", completed: false },
+    { id: 2, description: "Fix bugs", completed: true },
+    { id: 3, description: "Plan meeting", completed: false },
+    { id: 4, description: "Email client", completed: true },
+];
+
+function groupedTasks(tasks) {
+    return tasks.reduce((acc, task) => {
+        const key = task.completed ? 'done' : 'todo';
+        if (!acc[key]) {
+            acc[key] = [];
+        }
+        acc[key].push(task);
+        return acc;
+    }, {});
+}
+
+console.log(groupedTasks(tasks));
+
+
+//* 🔔 15. Debounce Wrapper (Mocked Timing)
+//  Write a debounce function that delays calls to fn by ignoring repeated ones in a short loop (no timers yet).
+
+//! Solution
+
+function debounce(func, timeout = 500) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}
+
+function saveInput() {
+    //? console.log('Saving data...');
+}
+
+const processChange = debounce(saveInput);
+processChange();
+processChange();
+processChange();
+
+//* 🧮 16. Count by Type
+//  Given an array of values, return an object showing how many are strings, numbers, etc.
+
+//! Solution
+
+const values = [1, 'hello', true, null, undefined, { name: 'Alice' }, [1, 2, 3], function() {}, Symbol('sym')];
+
+function countByType(arr) {
+    const counts = {};
+
+    for (const item of arr) {
+        const type = typeof item;
+
+        if (counts[type]) {
+            counts[type] += 1;
+        } else {
+            counts[type] = 1;
+        }
+    }
+
+    return counts;
+}
+
+console.log(countByType(values));
+
+//* 🔐 17. Custom Filter
+//  Write your own customFilter(arr, fn) that mimics Array.prototype.filter.
+
+//! Solution
+
+function customFilter(arr, fn) {
+    const result = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        const val = arr[i];
+        if (fn(val, i, arr)) {
+            result.push(val);
+        };
+    };
+    return result;
+}
+
+const numbers = [1, 2, 3, 4, 5];
+const even = customFilter(numbers, (n) => n % 2 === 0);
+console.log(even);
+
+
+//* ⌛ 18. Human-Readable Time
+//  Create a function timeSince(date) that returns "2 days ago", "1 hour ago", etc.
+
+//! Solution
+
+function timeSince(date) {
+    const now = new Date();
+    const diff = now - new Date(date);
+    const seconds = Math.floor(diff / 1000);
+
+    if (seconds < 60) {
+        return 'just now';
+    } else if (seconds < 3600) {
+        const minutes = Math.floor(seconds / 60);
+        return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+    } else if (seconds < 86400) {
+        const hours = Math.floor(seconds / 3600);
+        return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+    } else if (seconds < 604800) {
+        const days = Math.floor(seconds / 86400);
+        return `${days} day${days !== 1 ? 's' : ''} ago`;
+    } else {
+        const weeks = Math.floor(seconds / 604800);
+        return `${weeks} week${weeks !== 1 ? 's' : ''} ago`;
+    };
+}
+
+console.log(timeSince('1970-01-01'));
+console.log(timeSince(new Date()));
+
+//* 🧵 19. String Pipeline
+//  Write pipe(f1, f2, f3)(input) to apply string transformations left-to-right.
+
+//! Solution
+
+function pipe(...fns) {
+    return function (initialValue) {
+        return fns.reduce((val, fn) => fn(val), initialValue);
+    };
+}
+
+const trim = str => str.trim();
+const toUpper = str => str.toUpperCase();
+const addExclamation = str => str + '!';
+
+const pipeline = pipe(trim, toUpper, addExclamation);
+const result = pipeline("   hello world   ");
+console.log(result);
+
+
+//* 🧠 20. Quiz Grader
+//  Given arrays of answers and correct answers, return a score out of 100.
+
+//! Solution
+
+function grade(answers, correctAnswers) {
+    let correctCount = 0;
+    let incorrectCount = 0;
+    const incorrectQuestions = [];
+
+    for (let i = 0; i < answers.length; i++) {
+        if (answers[i] === correctAnswers[i]) {
+            correctCount++;
+            console.log(`Question ${i + 1}: ✅ Correct!`)
+        } else {
+            incorrectCount++;
+            incorrectQuestions.push({
+                question: i + 1,
+                yourAnswer: answers[i],
+                correctAnswer: correctAnswers[i]
+            });
+            console.log(`Question ${i + 1}: ❌ Incorrect. Your answer: ${answers[i]}, Correct answer: ${correctAnswers[i]}`);
+        };
+    };
+    const score = (correctCount / answers.length) * 100;
+    console.log(`\nFinal Score: ${score.toFixed(2)}%`);
+    console.log(`Incorrect Questions:`, incorrectQuestions);
+    return +score.toFixed(2);
+}
+
+const answers = ["a", "b", "c", "d"];
+const correct = ["a", "c", "c", "d"];
+
+grade(answers, correct);
